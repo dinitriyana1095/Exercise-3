@@ -1,0 +1,107 @@
+<table id="datatablesId" class="cell-border">
+        <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Name</th>
+                    <th>Rotation Period</th>
+                    <th>Orbital Period</th>
+                    <th>Diameter</th>
+                    <th>Climate</th>
+                    <th>Gravity</th>
+                    <th>Tertain</th>
+                    <th>Surface Water</th>
+                    <th>Population</th>
+                </tr>      
+        </thead>
+<body>
+    </div>
+    </body>
+    </html>
+</body>
+</div>
+</table>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+<div class="table-wrapper-scroll-y my-custom-scrollbar">
+</div>
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<script>
+/**var data = [
+    {
+        "name":       "Tiger Nixon",
+        "position":   "System Architect",
+        "salary":     "$3,120",
+        "start_date": "2011/04/25",
+        "office":     "Edinburgh",
+        "extn":       "5421"
+    },
+    {
+        "name":       "Garrett Winters",
+        "position":   "Director",
+        "salary":     "$5,300",
+        "start_date": "2011/07/25",
+        "office":     "Edinburgh",
+        "extn":       "8422"
+    }
+]
+$('#datatablesId').DataTable( {
+    data: data,
+    columns: [
+        { data: 'name' },
+        { data: 'position' },
+        { data: 'salary' },
+        { data: 'office' }
+    ]
+} );*/
+var page =1;
+var url = 'https://swapi.co/api/planets/?people';
+$('#datatablesId').DataTable( {
+    ajax: {
+        url: url,
+        dataSrc: 'results'
+    },
+    columns: [  
+            { data: 'null'},
+            { data: 'name' },
+            { data: 'rotation_period'},
+            { data: 'orbital_period'},
+            { data: 'diameter'},
+            { data: 'climate'},
+            { data: 'gravity'},
+            { data: 'terrain'},
+            { data: 'surface_water'},
+            { data: 'population'},          
+        ]
+} );
+
+var page =1;
+var url = 'https://swapi.co/api/planets/?people';
+$('#datatablesId').DataTable( {
+    ajax: {
+        url: url,
+        dataSrc: 'previous'
+    }, 
+    columns: [  
+            { data: 'null'},              
+        ]
+} );
+
+$(document).ready(function() {
+    var t = $('#example').DataTable( {
+        "columnDefs": [ {
+            "searchable": false,
+            "orderable": false,
+            "targets": 0
+
+        } ],
+        "order": [[ 2, 'asc' ]]
+    } );
+ 
+    t.on( 'order.dt search.dt', function () {
+        t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+        } );
+    } ).draw();
+} );
+</script>
